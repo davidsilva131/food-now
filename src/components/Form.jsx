@@ -8,7 +8,6 @@ const Form = ({ users }) => {
   const [bebida, setBebida] = useState(true)
   const [data, setData] = useState([])
   console.log(users);
-  const [usersId, setUsersId] = useState()
 
   const handlereset = () => {
     const cedula = document.getElementById("cedula")
