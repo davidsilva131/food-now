@@ -18,9 +18,9 @@ function App() {
   }
   return (
     <div className='container'>
-      <input type="file" onChange={(e) => { handleFile(e) }} />
       {
-        users != null && (<Form users={users} />)
+        users != null ? (<Form users={users} />) : <input type="file" onChange={(e) => { handleFile(e) }} />
+
       }
 
     </div>
