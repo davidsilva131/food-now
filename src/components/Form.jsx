@@ -1,16 +1,29 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "../styles/Form.css"
 import Excel from "./Excel"
-const Form = () => {
+import * as XLSX from 'xlsx'
+
+const Form = ({ users }) => {
   const [almuerzo, setAlmuerzo] = useState(true)
   const [bebida, setBebida] = useState(true)
   const [data, setData] = useState([])
+  console.log(users);
+  const [usersId, setUsersId] = useState()
+
+  const handlereset = () => {
+    const cedula = document.getElementById("cedula")
+    cedula.value = "";
+  }
 
   const handleRegister = (e) => {
     e.preventDefault()
 
     const cedula = document.getElementById("cedula")
-    if (cedula.value != "") {
+    cedula.value == "" && alert("Porfavor ingrese todos los espacios del formulario")
+    if (users.find(element => element.cedula.toString() === cedula.value)) {
+      const userName = users[users.findIndex(element => element.cedula.toString() === cedula.value)].nombre
+      console.log(userName);
+
       const datos = {
         cedula: cedula.value,
         almuerzo: almuerzo ? "SI" : "NO",
@@ -19,17 +32,15 @@ const Form = () => {
       const dataClone = [...data]
       dataClone.push(datos)
       setData(dataClone)
+      alert(`${userName} disfruta de tu comida!!!`)
+      handlereset()
+    } else {
+      alert("El usuario no se encuantra registrado en la base de datos")
+    }
 
-    } else (
-      alert("Porfavor ingrese todos los espacios del formulario")
-    )
 
   }
 
-  const handlereset = () => {
-    const cedula = document.getElementById("cedula")
-    cedula.value = "";
-  }
   return (
     <>
       <form onSubmit={handleRegister} id="form">

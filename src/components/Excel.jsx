@@ -14,7 +14,9 @@ const Excel = ({ datos, setData, handlereset }) => {
   }
 
   return (
-    <button className='btn' onClick={() => { exportExcel() }}>Generar Excel</button>
+    <>
+      <button className='btn' onClick={() => { exportExcel() }}>Generar Excel</button>
+    </>
   )
 }
 
